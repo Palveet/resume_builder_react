@@ -33,11 +33,11 @@ const SignUp = () => {
 
     return (
         <div>
-            <h1>Sign Up</h1>
+            <h2>Sign Up</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
             {success && <p style={{ color: "green" }}>{success}</p>}
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} style={{ maxWidth: '300px', margin: 'auto' }}> 
+                <div className='controls'>
                     <label>Username:</label>
                     <input
                         type="text"
@@ -47,7 +47,7 @@ const SignUp = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className='controls'>
                     <label>Email:</label>
                     <input
                         type="email"
@@ -57,7 +57,7 @@ const SignUp = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className='controls'>
                     <label>Password:</label>
                     <input
                         type="password"
@@ -67,7 +67,7 @@ const SignUp = () => {
                         required
                     />
                 </div>
-                <button type="submit">Sign Up</button>
+                <button type="submit" className="button primary-button">Sign Up</button>
             </form>
         </div>
     );

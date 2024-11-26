@@ -5,6 +5,7 @@ import AppRoutes from './routes';
 
 ReactDOM.render(
     <React.StrictMode>
+        <h1>Resume Builder</h1>
         <AppRoutes />
     </React.StrictMode>,
     document.getElementById('root')

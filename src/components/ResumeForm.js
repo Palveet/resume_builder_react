@@ -2,27 +2,19 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../api/axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
+import { ReactComponent as Download} from '../assets/Download.svg';
 const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
     const [formData, setFormData] = useState({
-        title: resume.title || "",
+        title: resume?.title || "",
         personal_info: {
-            name: resume.personal_info?.name || "",
-            email: resume.personal_info?.email || "",
-            phone: resume.personal_info?.phone || "",
+            name: resume?.personal_info?.name || "",
+            email: resume?.personal_info?.email || "",
+            phone: resume?.personal_info?.phone || "",
         },
-        education: resume.education || "",
-        work_experience: resume.work_experience || "",
-        skills: resume.skills || "",
+        education: resume?.education || "",
+        work_experience: resume?.work_experience || "",
+        skills: resume?.skills || "",
     });
-
-    const [previewUrl, setPreviewUrl] = useState("");
-
-    useEffect(() => {
-        if (isEditing && resume.id) {
-            setPreviewUrl(`http://127.0.0.1:8000/api/resumes/${resume.id}/download/pdf/`);
-        }
-    }, [resume, isEditing]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -54,14 +46,6 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
             onSuccess();
         } catch (error) {
             console.error("Error saving resume:", error);
-        }
-    };
-
-    const handlePreviewPDF = () => {
-        if (isEditing && resume.id) {
-            setPreviewUrl(`http://127.0.0.1:8000/api/resumes/${resume.id}/download/pdf/`);
-        } else {
-            console.warn("Preview is only available for saved resumes.");
         }
     };
 
@@ -149,25 +133,14 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         placeholder="Enter your skills here..."
                     />
                 </div>
-                <button type="submit">{isEditing ? "Update Resume" : "Create Resume"}</button>
+                <button type="submit" className="primary-button button">{isEditing ? "Update Resume" : "Submit"}</button>
             </form>
 
             <div style={{ marginTop: "20px" }}>
-                <button onClick={handlePreviewPDF}>Preview PDF</button>
-                <button onClick={handleDownloadPDF}>Download PDF</button>
+                <button className="action-button download-button" onClick={handleDownloadPDF}>
+                <Download style={{ width: '16px', height: '16px' }} />
+                 PDF</button>
             </div>
-
-            {previewUrl && (
-                <div style={{ marginTop: "20px" }}>
-                    <h3>Resume Preview:</h3>
-                    <iframe
-                        src={previewUrl}
-                        width="100%"
-                        height="600px"
-                        title="Resume Preview"
-                    ></iframe>
-                </div>
-            )}
         </div>
     );
 };

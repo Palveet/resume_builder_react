@@ -1,13 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 body {
+  font-family: "Poppins", serif;
+  text-align: center;
+  color: #A04668;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.button{
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+}
+.primary-button {
+  background-color: #A04668;
+}
+.edit-button,.delete-button{
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+.pdf,.docx{
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+input {
+
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+label {
+  margin-right: 10px;
+  text-align: right;
+  font-weight: bold;
+  width:100%;
+}
+
+.controls {
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  text-align: center;
+  color: #A04668;
+  margin-bottom: 20px;
+}
+
+.create-resume-button {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 10px 20px;
+  background-color: #28A745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.create-resume-button:hover {
+  background-color: #218838;
+}
+
+.resume-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.resume-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+.resume-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
+}
+
+.resume-title {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #A04668;
+  font-weight: bold;
+  margin-right: auto;
+}
+
+.resume-title:hover {
+  text-decoration: underline;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action-button svg {
+  margin-right: 5px;
+}
+
+
+.download-button {
+  color: #28A745;
+}
+
+.action-button:hover {
+  background-color: #eee;
 }

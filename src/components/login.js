@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../api/axios';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
@@ -21,22 +21,40 @@ const Login = () => {
 
     return (
         <div>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={credentials.username}
-                    onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={credentials.password}
-                    onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                />
-                <button type="submit">Login</button>
+            <h2>Login</h2>
+            <form onSubmit={handleLogin} style={{ maxWidth: '300px', margin: 'auto' }}>
+                <div className='controls'>
+                    <label htmlFor="username" >
+                        Username
+                    </label>
+                    <input
+                        id="username"
+                        type="text"
+                        placeholder="Enter your username"
+                        value={credentials.username}
+                        onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+                    />
+                </div>
+                <div className='controls'>
+                    <label htmlFor="password" >
+                        Password
+                    </label>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        value={credentials.password}
+                        onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                    />
+                </div>
+                <button
+                    type="submit"
+                    className='button primary-button'
+                >
+                    Login
+                </button>
             </form>
+
             <p>
                 Don't have an account? <Link to="/signup">Sign up here</Link>.
             </p>
