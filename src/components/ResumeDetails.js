@@ -36,28 +36,15 @@ const ResumeDetails = () => {
             <p>Name: {resume.personal_info.name}</p>
             <p>Email: {resume.personal_info.email}</p>
             <p>Phone: {resume.personal_info.phone}</p>
+
             <h2>Education</h2>
-            <ul>
-                {resume.education.map((edu, index) => (
-                    <li key={index}>
-                        {edu.institution} - {edu.degree} ({edu.year})
-                    </li>
-                ))}
-            </ul>
+            <div dangerouslySetInnerHTML={{ __html: resume.education }} />
+
             <h2>Work Experience</h2>
-            <ul>
-                {resume.work_experience.map((work, index) => (
-                    <li key={index}>
-                        {work.company}: {work.role} ({work.years})
-                    </li>
-                ))}
-            </ul>
+            <div dangerouslySetInnerHTML={{ __html: resume.work_experience }} />
+
             <h2>Skills</h2>
-            <ul>
-                {resume.skills.map((skill, index) => (
-                    <li key={index}>{skill}</li>
-                ))}
-            </ul>
+            <div dangerouslySetInnerHTML={{ __html: resume.skills }} />
         </div>
     );
 };

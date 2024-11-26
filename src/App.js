@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import "react-quill/dist/quill.snow.css";
 
 function App() {
   return (
