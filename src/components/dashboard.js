@@ -3,14 +3,28 @@ import axiosInstance from "../api/axios";
 import { useNavigate, Link } from "react-router-dom";
 import ResumeForm from "./ResumeForm";
 import { ReactComponent as Edit } from '../assets/Edit.svg';
-import { ReactComponent as Delete} from '../assets/delete.svg';
-import { ReactComponent as Download} from '../assets/Download.svg';
+import { ReactComponent as Delete } from '../assets/delete.svg';
+import { ReactComponent as Download } from '../assets/Download.svg';
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const [resumes, setResumes] = useState([]);
     const [editingResume, setEditingResume] = useState(null);
     const [isCreating, setIsCreating] = useState(false);
+
+    const handleLogout = async () => {
+        const refreshToken = localStorage.getItem("refresh_token");
+
+        try {
+            await axiosInstance.post("logout/", { refresh: refreshToken });
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+
+        navigate("/");
+    };
 
     useEffect(() => {
         const token = localStorage.getItem("access_token");
@@ -53,7 +67,7 @@ const Dashboard = () => {
     const handleDownload = async (id, format) => {
         try {
             const response = await axiosInstance.get(`resumes/${id}/download/${format}/`, {
-                responseType: "blob", 
+                responseType: "blob",
             });
 
             const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -79,61 +93,62 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-  <h1 className="dashboard-title">Dashboard</h1>
-  <button className="create-resume-button" onClick={handleCreateResume}>
-    Create New Resume
-  </button>
-  <ul className="resume-list">
-    {resumes.map((resume) => (
-      <li key={resume.id} className="resume-item">
-        <div className="resume-info">
-          <Link to={`/resumes/${resume.id}`} className="resume-title">
-            {resume.title}
-          </Link>
-          <div className="resume-actions">
-            <button
-              className="action-button edit-button"
-              onClick={() => handleEditResume(resume)}
-              title="Edit Resume"
-            >
-              <Edit style={{ width: '16px', height: '16px' }} />
+            <h1 className="dashboard-title">Dashboard</h1>
+            <button onClick={handleLogout}>Logout</button>
+            <button className="create-resume-button" onClick={handleCreateResume}>
+                Create New Resume
             </button>
-            <button
-              className="action-button delete-button"
-              onClick={() => handleDeleteResume(resume.id)}
-              title="Delete Resume"
-            >
-              <Delete style={{ width: '16px', height: '16px' }} />
-            </button>
-            <button
-              className="action-button download-button"
-              onClick={() => handleDownload(resume.id, "pdf")}
-              title="Download PDF"
-            >
-              <Download style={{ width: '16px', height: '16px' }} />
-              PDF
-            </button>
-            <button
-              className="action-button download-button"
-              onClick={() => handleDownload(resume.id, "docx")}
-              title="Download DOCX"
-            >
-              <Download style={{ width: '16px', height: '16px' }} />
-              DOCX
-            </button>
-          </div>
+            <ul className="resume-list">
+                {resumes.map((resume) => (
+                    <li key={resume.id} className="resume-item">
+                        <div className="resume-info">
+                            <Link to={`/resumes/${resume.id}`} className="resume-title">
+                                {resume.title}
+                            </Link>
+                            <div className="resume-actions">
+                                <button
+                                    className="action-button edit-button"
+                                    onClick={() => handleEditResume(resume)}
+                                    title="Edit Resume"
+                                >
+                                    <Edit style={{ width: '16px', height: '16px' }} />
+                                </button>
+                                <button
+                                    className="action-button delete-button"
+                                    onClick={() => handleDeleteResume(resume.id)}
+                                    title="Delete Resume"
+                                >
+                                    <Delete style={{ width: '16px', height: '16px' }} />
+                                </button>
+                                <button
+                                    className="action-button download-button"
+                                    onClick={() => handleDownload(resume.id, "pdf")}
+                                    title="Download PDF"
+                                >
+                                    <Download style={{ width: '16px', height: '16px' }} />
+                                    PDF
+                                </button>
+                                <button
+                                    className="action-button download-button"
+                                    onClick={() => handleDownload(resume.id, "docx")}
+                                    title="Download DOCX"
+                                >
+                                    <Download style={{ width: '16px', height: '16px' }} />
+                                    DOCX
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+            {(isCreating || editingResume !== null) && (
+                <ResumeForm
+                    resume={editingResume}
+                    isEditing={Boolean(editingResume)}
+                    onSuccess={refreshResumes}
+                />
+            )}
         </div>
-      </li>
-    ))}
-  </ul>
-  {(isCreating || editingResume !== null) && (
-    <ResumeForm
-      resume={editingResume}
-      isEditing={Boolean(editingResume)}
-      onSuccess={refreshResumes}
-    />
-  )}
-</div>
 
     );
 };
