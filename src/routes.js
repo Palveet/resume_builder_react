@@ -1,21 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/login';
-import Dashboard from './components/dashboard';
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/login";
+import Dashboard from "./components/dashboard";
 import ResumeDetails from "./components/ResumeDetails";
 import SignUp from "./components/SignUp";
-import ProtectedRoute from './components/ProtectedRoute';
-
+import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from "./components/Profile";
 const AppRoutes = () => {
     return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/resumes/:id" element={<ResumeDetails />} />
-                <Route path="/dashboard" element={<ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
-            </Routes>
-        </Router>
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/resumes/:id" element={<ResumeDetails />} />
+            <Route path="/profile" element={<Profile />} />
+        </Routes>
     );
 };
 

@@ -7,6 +7,9 @@ const SignUp = () => {
         username: "",
         email: "",
         password: "",
+        age: "",
+        dob: "",
+        gender: "",
     });
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -36,38 +39,56 @@ const SignUp = () => {
             <h2>Sign Up</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
             {success && <p style={{ color: "green" }}>{success}</p>}
-            <form onSubmit={handleSubmit} style={{ maxWidth: '300px', margin: 'auto' }}> 
-                <div className='controls'>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div className='controls'>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div className='controls'>
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <button type="submit" className="button primary-button">Sign Up</button>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    onChange={handleInputChange}
+                    required
+                />
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    onChange={handleInputChange}
+                    required
+                />
+                <input
+                    type="number"
+                    name="age"
+                    placeholder="Age"
+                    onChange={handleInputChange}
+                    required
+                />
+                <input
+                    type="date"
+                    name="dob"
+                    placeholder="Date of Birth"
+                    onChange={handleInputChange}
+                    required
+                />
+                <select name="gender" onChange={handleInputChange} required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={handleInputChange}
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={handleInputChange}
+                    required
+                />
+                <button type="submit">Sign Up</button>
             </form>
         </div>
     );

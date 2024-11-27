@@ -12,19 +12,6 @@ const Dashboard = () => {
     const [editingResume, setEditingResume] = useState(null);
     const [isCreating, setIsCreating] = useState(false);
 
-    const handleLogout = async () => {
-        const refreshToken = localStorage.getItem("refresh_token");
-
-        try {
-            await axiosInstance.post("logout/", { refresh: refreshToken });
-        } catch (error) {
-            console.error("Error during logout:", error);
-        }
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-
-        navigate("/");
-    };
 
     useEffect(() => {
         const token = localStorage.getItem("access_token");
@@ -94,7 +81,6 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <h1 className="dashboard-title">Dashboard</h1>
-            <button onClick={handleLogout}>Logout</button>
             <button className="create-resume-button" onClick={handleCreateResume}>
                 Create New Resume
             </button>
