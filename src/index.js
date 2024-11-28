@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, useNavigate, Link } from "react-router-dom";
 import "./index.css";
@@ -10,47 +10,63 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem("access_token");
-        setIsLoggedIn(!!token); 
+        const checkLoginStatus = () => {
+            const token = localStorage.getItem("access_token");
+            setIsLoggedIn(!!token);
+        };
+
+        checkLoginStatus();
+
+        // Optional: Add an event listener to detect token changes in localStorage
+        const handleStorageChange = () => {
+            checkLoginStatus();
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+        return () => window.removeEventListener("storage", handleStorageChange);
     }, []);
 
     const handleLogout = async () => {
         const refreshToken = localStorage.getItem("refresh_token");
-
         try {
-            await axiosInstance.post("logout/", { refresh: refreshToken });
+            if (refreshToken) {
+                await axiosInstance.post("logout/", { refresh: refreshToken });
+            }
         } catch (error) {
             console.error("Error during logout:", error);
         }
-        // Clear tokens
+
+        // Clear tokens and update state
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
-
-        // Redirect to login
+        setIsLoggedIn(false);
         navigate("/");
     };
-
-    useEffect(() => {
-        const token = localStorage.getItem("access_token");
-        if (!token) {
-            navigate("/");
-        }
-    }, [navigate]);
 
     return (
         <div className="header">
             <h1>Resume Builder</h1>
-            {/* <Link to="/profile">Profile</Link> */}
-            {/* <button className="logout-button" onClick={handleLogout}> */}
-                {/* Logout */}
-            {/* </button> */}
+            {isLoggedIn && (
+                <div className="header-actions">
+                    <Link to="/profile" className="profile-link">
+                        Profile
+                    </Link>
+                    <button
+                        className="logout-button"
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
 
+
 const App = () => (
     <Router>
-        {/* <Header /> */}
+        <Header />
         <AppRoutes />
     </Router>
 );

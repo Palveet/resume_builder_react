@@ -37,11 +37,15 @@ const SignUp = () => {
     };
 
     return (
-        <div>
+        <div style={{margin:"auto 20%"}}>
             <h2>Sign Up</h2>
             {error && <p style={{ color: "red" }}>{error}</p>}
             {success && <p style={{ color: "green" }}>{success}</p>}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} >
+            <div className='controls'>
+                    <label htmlFor="username" >
+                        Username
+                    </label>
                 <input
                     type="text"
                     name="username"
@@ -49,6 +53,11 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     required
                 />
+                </div>
+                <div className='controls'>
+                    <label htmlFor="name" >
+                        Name
+                    </label>
                 <input
                     type="text"
                     name="name"
@@ -56,6 +65,11 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     required
                 />
+                </div>
+                <div className='controls'>
+                    <label htmlFor="age" >
+                        Age
+                    </label>
                 <input
                     type="number"
                     name="age"
@@ -63,6 +77,11 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     required
                 />
+                </div>
+                <div className='controls'>
+                    <label htmlFor="dob" >
+                        Birthday
+                    </label>
                 <input
                     type="date"
                     name="dob"
@@ -70,12 +89,22 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     required
                 />
+                </div>
+                <div className='controls'>
+                    <label htmlFor="gender" >
+                        Gender
+                    </label>
                 <select name="gender" onChange={handleInputChange} required>
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                 </select>
+                </div>
+                <div className='controls'>
+                    <label htmlFor="email" >
+                        Email
+                    </label>
                 <input
                     type="email"
                     name="email"
@@ -83,6 +112,11 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     required
                 />
+                </div>
+                <div className='controls'>
+                    <label htmlFor="password" >
+                        Password
+                    </label>
                 <input
                     type="password"
                     name="password"
@@ -90,7 +124,8 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <button type="submit">Sign Up</button>
+                </div>
+                <button type="submit" className='button primary-button'>Sign Up</button>
             </form>
         </div>
     );
