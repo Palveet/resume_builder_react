@@ -40,17 +40,17 @@ const Header = () => {
     return (
         <div className="header">
             <h1>Resume Builder</h1>
-            <Link to="/profile">Profile</Link>
-            <button className="logout-button" onClick={handleLogout}>
-                Logout
-            </button>
+            {/* <Link to="/profile">Profile</Link> */}
+            {/* <button className="logout-button" onClick={handleLogout}> */}
+                {/* Logout */}
+            {/* </button> */}
         </div>
     );
 };
 
 const App = () => (
     <Router>
-        <Header />
+        {/* <Header /> */}
         <AppRoutes />
     </Router>
 );

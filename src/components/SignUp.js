@@ -6,6 +6,7 @@ const SignUp = () => {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
+        name:"",
         password: "",
         age: "",
         dob: "",
@@ -27,6 +28,7 @@ const SignUp = () => {
 
         try {
             const response = await axios.post("http://127.0.0.1:8000/api/register/", formData);
+            console.log(response)
             setSuccess("User registered successfully! You can now log in.");
             setTimeout(() => navigate("/"), 2000); 
         } catch (err) {

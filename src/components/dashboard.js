@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "../api/axios";
 import { useNavigate, Link } from "react-router-dom";
 import ResumeForm from "./ResumeForm";
-import { ReactComponent as Edit } from '../assets/Edit.svg';
-import { ReactComponent as Delete } from '../assets/delete.svg';
-import { ReactComponent as Download } from '../assets/Download.svg';
+import { ReactComponent as Edit } from "../assets/Edit.svg";
+import { ReactComponent as Delete } from "../assets/delete.svg";
+import { ReactComponent as Download } from "../assets/Download.svg";
+import { ReactComponent as Copy } from "../assets/Copy.svg";
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const [resumes, setResumes] = useState([]);
     const [editingResume, setEditingResume] = useState(null);
     const [isCreating, setIsCreating] = useState(false);
-
 
     useEffect(() => {
         const token = localStorage.getItem("access_token");
@@ -71,6 +71,19 @@ const Dashboard = () => {
         }
     };
 
+    const handleCopyResume = async (resume) => {
+        try {
+            const copiedResume = { ...resume };
+            delete copiedResume.id; 
+            copiedResume.title = `${copiedResume.title} - Copy`; 
+
+            await axiosInstance.post("resumes/", copiedResume);
+            refreshResumes();
+        } catch (err) {
+            console.error("Error copying resume:", err);
+        }
+    };
+
     const refreshResumes = async () => {
         const response = await axiosInstance.get("resumes/");
         setResumes(response.data);
@@ -97,21 +110,21 @@ const Dashboard = () => {
                                     onClick={() => handleEditResume(resume)}
                                     title="Edit Resume"
                                 >
-                                    <Edit style={{ width: '16px', height: '16px' }} />
+                                    <Edit style={{ width: "16px", height: "16px" }} />
                                 </button>
                                 <button
                                     className="action-button delete-button"
                                     onClick={() => handleDeleteResume(resume.id)}
                                     title="Delete Resume"
                                 >
-                                    <Delete style={{ width: '16px', height: '16px' }} />
+                                    <Delete style={{ width: "16px", height: "16px" }} />
                                 </button>
                                 <button
                                     className="action-button download-button"
                                     onClick={() => handleDownload(resume.id, "pdf")}
                                     title="Download PDF"
                                 >
-                                    <Download style={{ width: '16px', height: '16px' }} />
+                                    <Download style={{ width: "16px", height: "16px" }} />
                                     PDF
                                 </button>
                                 <button
@@ -119,8 +132,15 @@ const Dashboard = () => {
                                     onClick={() => handleDownload(resume.id, "docx")}
                                     title="Download DOCX"
                                 >
-                                    <Download style={{ width: '16px', height: '16px' }} />
+                                    <Download style={{ width: "16px", height: "16px" }} />
                                     DOCX
+                                </button>
+                                <button
+                                    className="action-button copy-button"
+                                    onClick={() => handleCopyResume(resume)}
+                                    title="Copy Resume"
+                                >
+                                    <Copy style={{ width: "16px", height: "16px" }} />
                                 </button>
                             </div>
                         </div>
@@ -135,7 +155,6 @@ const Dashboard = () => {
                 />
             )}
         </div>
-
     );
 };
 
