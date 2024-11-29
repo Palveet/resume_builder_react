@@ -133,15 +133,6 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         required
                     />
                 </div>
-                {/* <div className='textbox-controls'>
-                    <label>Education:</label>
-                    <ReactQuill
-                        theme="snow"
-                        value={formData.education}
-                        onChange={(value) => handleQuillChange("education", value)}
-                        placeholder="Enter your education details here..."
-                    />
-                </div> */}
                 <div className='textbox-controls'>
                     <label>Work Experience:</label>
                     <ReactQuill
@@ -153,15 +144,6 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         modules={modules}
                     />
                 </div>
-                {/* <div className='textbox-controls'>
-                    <label>Skills:</label>
-                    <ReactQuill
-                        theme="snow"
-                        value={formData.skills}
-                        onChange={(value) => handleQuillChange("skills", value)}
-                        placeholder="Enter your skills here..."
-                    />
-                </div> */}
                 <button type="submit" className="primary-button button">{isEditing ? "Update Resume" : "Submit"}</button>
             </form>
 

@@ -4,7 +4,7 @@
 body {
   font-family: "Poppins", serif;
   text-align: center;
-  color: #A04668;
+  color: #A04668!important;
   margin: 0;
   padding: 0;
 }
@@ -16,6 +16,7 @@ body {
   width: 200px;
   padding: 10px;
   border-radius: 4px;
+  margin-top:20px;
 }
 .primary-button {
   background-color: #A04668;
@@ -195,7 +196,7 @@ label {
 }
 
 a{
-  color: #7f4a88;
+  color: #7f4a88!important;
   text-decoration: none;
   margin:0 10px;
 }
@@ -223,4 +224,43 @@ a{
 
 .ql-snow .ql-picker.ql-font .ql-picker-label::before, .ql-snow .ql-picker.ql-font .ql-picker-item::before{
   content: attr(data-value)!important;
+}
+
+@media(max-width:570px){
+  input,select{
+    width:140px;
+  }
+  .resume-title{
+    font-size:0.8rem;
+  }
+  .action-button{
+    padding:2px 4px;
+    font-size:12px;
+  }
+}
+
+@media(max-width:450px){
+  input,select{
+    width:140px;
+  }
+  .resume-title{
+    font-size:0.6rem;
+  }
+  .action-button{
+    padding:2px 2px;
+    font-size:7px;
+  }
+  .action-button svg{
+    width:9px!important;
+    height:9px!important;
+  }
+}
+
+@media(max-width:900px){
+  .textbox-controls{
+    display:block;
+  }
+  .textbox-controls label{
+    width:150px;
+  }
 }
