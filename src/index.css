@@ -59,7 +59,7 @@ label {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top:10%;
+  margin-top:5%;
 }
 
 .dashboard-title {
@@ -186,4 +186,10 @@ label {
 .p-flex{
   display: flex;
   justify-content: center;
+}
+
+a{
+  color: #7f4a88;
+  text-decoration: none;
+  margin:0 10px;
 }
