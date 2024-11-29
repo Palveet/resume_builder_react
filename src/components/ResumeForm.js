@@ -3,6 +3,32 @@ import axiosInstance from "../api/axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { ReactComponent as Download} from '../assets/Download.svg';
+
+const Font = ReactQuill.Quill.import("formats/font");
+Font.whitelist = ["arial", "times-new-roman", "courier", "comic-sans", "georgia", "impact"];
+ReactQuill.Quill.register(Font, true);
+
+const modules = {
+    toolbar: [
+        [{ font: Font.whitelist }], 
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        ["bold", "italic", "underline"], 
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ align: 'center' }, { align: 'right' },{ align: 'justify' }],
+        ["clean"],
+    ],
+};
+
+const formats = [
+    "font",
+    "header",
+    "bold",
+    "italic",
+    "underline",
+    "list",
+    "bullet",
+    "align",
+];
 const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
     const [formData, setFormData] = useState({
         title: resume?.title || "",
@@ -62,11 +88,12 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
             console.warn("Download is only available for saved resumes.");
         }
     };
+    
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className='controls'>
                     <label>Title:</label>
                     <input
                         type="text"
@@ -76,7 +103,7 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         required
                     />
                 </div>
-                <div>
+                <div className='controls'>
                     <label>Name:</label>
                     <input
                         type="text"
@@ -86,7 +113,7 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         required
                     />
                 </div>
-                <div>
+                <div className='controls'>
                     <label>Email:</label>
                     <input
                         type="email"
@@ -96,7 +123,7 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         required
                     />
                 </div>
-                <div>
+                <div className='controls'>
                     <label>Phone:</label>
                     <input
                         type="tel"
@@ -106,7 +133,7 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         required
                     />
                 </div>
-                <div>
+                {/* <div className='textbox-controls'>
                     <label>Education:</label>
                     <ReactQuill
                         theme="snow"
@@ -114,17 +141,19 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         onChange={(value) => handleQuillChange("education", value)}
                         placeholder="Enter your education details here..."
                     />
-                </div>
-                <div>
+                </div> */}
+                <div className='textbox-controls'>
                     <label>Work Experience:</label>
                     <ReactQuill
                         theme="snow"
                         value={formData.work_experience}
                         onChange={(value) => handleQuillChange("work_experience", value)}
                         placeholder="Enter your work experience here..."
+                        formats={formats}
+                        modules={modules}
                     />
                 </div>
-                <div>
+                {/* <div className='textbox-controls'>
                     <label>Skills:</label>
                     <ReactQuill
                         theme="snow"
@@ -132,7 +161,7 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         onChange={(value) => handleQuillChange("skills", value)}
                         placeholder="Enter your skills here..."
                     />
-                </div>
+                </div> */}
                 <button type="submit" className="primary-button button">{isEditing ? "Update Resume" : "Submit"}</button>
             </form>
 
