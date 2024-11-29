@@ -32,27 +32,12 @@ const formats = [
 const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
     const [formData, setFormData] = useState({
         title: resume?.title || "",
-        personal_info: {
-            name: resume?.personal_info?.name || "",
-            email: resume?.personal_info?.email || "",
-            phone: resume?.personal_info?.phone || "",
-        },
-        education: resume?.education || "",
-        work_experience: resume?.work_experience || "",
-        skills: resume?.skills || "",
+        resume_content: resume?.resume_content || "",
     });
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        if (name.startsWith("personal_info.")) {
-            const field = name.split(".")[1];
-            setFormData((prevData) => ({
-                ...prevData,
-                personal_info: { ...prevData.personal_info, [field]: value },
-            }));
-        } else {
-            setFormData((prevData) => ({ ...prevData, [name]: value }));
-        }
+        setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
     const handleQuillChange = (field, value) => {
@@ -103,42 +88,12 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                         required
                     />
                 </div>
-                <div className='controls'>
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        name="personal_info.name"
-                        value={formData.personal_info.name}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div className='controls'>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="personal_info.email"
-                        value={formData.personal_info.email}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                <div className='controls'>
-                    <label>Phone:</label>
-                    <input
-                        type="tel"
-                        name="personal_info.phone"
-                        value={formData.personal_info.phone}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
                 <div className='textbox-controls'>
                     <label>Work Experience:</label>
                     <ReactQuill
                         theme="snow"
-                        value={formData.work_experience}
-                        onChange={(value) => handleQuillChange("work_experience", value)}
+                        value={formData.resume_content}
+                        onChange={(value) => handleQuillChange("resume_content", value)}
                         placeholder="Enter your work experience here..."
                         formats={formats}
                         modules={modules}
@@ -146,12 +101,6 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                 </div>
                 <button type="submit" className="primary-button button">{isEditing ? "Update Resume" : "Submit"}</button>
             </form>
-
-            <div style={{ marginTop: "20px" }}>
-                <button className="action-button download-button" onClick={handleDownloadPDF}>
-                <Download style={{ width: '16px', height: '16px' }} />
-                 PDF</button>
-            </div>
         </div>
     );
 };

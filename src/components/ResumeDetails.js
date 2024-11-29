@@ -32,19 +32,9 @@ const ResumeDetails = () => {
         <div>
             <button onClick={() => navigate(-1)}>Back</button>
             <h1>{resume.title}</h1>
-            <h2>Personal Info</h2>
-            <p>Name: {resume.personal_info.name}</p>
-            <p>Email: {resume.personal_info.email}</p>
-            <p>Phone: {resume.personal_info.phone}</p>
 
-            <h2>Education</h2>
-            <div dangerouslySetInnerHTML={{ __html: resume.education }} />
-
-            <h2>Work Experience</h2>
-            <div dangerouslySetInnerHTML={{ __html: resume.work_experience }} />
-
-            <h2>Skills</h2>
-            <div dangerouslySetInnerHTML={{ __html: resume.skills }} />
+            <h2>Resume Details</h2>
+            <div dangerouslySetInnerHTML={{ __html: resume.resume_content }} />
         </div>
     );
 };
