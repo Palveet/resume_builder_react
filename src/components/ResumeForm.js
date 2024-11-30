@@ -60,19 +60,6 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
         }
     };
 
-    const handleDownloadPDF = () => {
-        if (isEditing && resume.id) {
-            const pdfUrl = `http://127.0.0.1:8000/api/resumes/${resume.id}/download/pdf/`;
-            const link = document.createElement("a");
-            link.href = pdfUrl;
-            link.setAttribute("download", `${formData.title || "resume"}.pdf`);
-            document.body.appendChild(link);
-            link.click();
-            link.parentNode.removeChild(link);
-        } else {
-            console.warn("Download is only available for saved resumes.");
-        }
-    };
     
 
     return (
@@ -89,7 +76,7 @@ const ResumeForm = ({ resume = {}, onSuccess, isEditing = false }) => {
                     />
                 </div>
                 <div className='textbox-controls'>
-                    <label>Work Experience:</label>
+                    <label>Resume Details</label>
                     <ReactQuill
                         theme="snow"
                         value={formData.resume_content}
