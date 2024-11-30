@@ -31,8 +31,9 @@ const SignUp = () => {
             console.log(response)
             setSuccess("User registered successfully! You can now log in.");
             setTimeout(() => navigate("/"), 2000); 
-        } catch (err) {
-            setError(err.response?.data?.detail || "Something went wrong.");
+        } catch (response) {
+            console.log(response.response.data.error)
+            setError(response.response.data.error);
         }
     };
 
