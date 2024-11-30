@@ -30,7 +30,7 @@ const ResumeDetails = () => {
 
     return (
         <div>
-            <button onClick={() => navigate(-1)}>Back</button>
+            {/* <button onClick={() => navigate(-1)}>Back</button> */}
             <h1>{resume.title}</h1>
 
             <h2>Resume Details</h2>
